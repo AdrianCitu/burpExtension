@@ -25,3 +25,4 @@ Requirements to run the extension:
 - Burp Suite Professional version 1.6.39 (or later ?) - not sure that the next API
   versions will be backward compatible.
 
+The extension jar can be found here: https://github.com/AdrianCitu/burpExtension/tree/master/target
