@@ -34,8 +34,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.adriancitu.burp.scanner.Utility;
-
 public class UtilityTest {
 	
 	private Map<String, String> map = new HashMap<>();
@@ -57,7 +55,7 @@ public class UtilityTest {
 
 	@Test
 	public void testComputePortNumber() {
-		assertEquals(8082,Utility.computePortNumberFromProxySettings(map));
+		assertEquals(8082,Utility.computeUnusedPort(map));
 	}
 
 	@Test

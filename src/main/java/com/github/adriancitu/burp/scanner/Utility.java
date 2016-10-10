@@ -41,6 +41,10 @@ public final class Utility {
 	private Utility() {
 	}
 
+	/**
+	 * Method getting a list from a map values  having the keys starting
+	 * with a specific prefix.
+	 */
 	public static List<String> getEntriesHavingKeyStartingWith(
 			final Map<String, String> map, final String prefix) {
 		return map.entrySet().stream()
@@ -48,7 +52,11 @@ public final class Utility {
 				.map(p -> p.getValue()).collect(Collectors.toList());
 	}
 
-	public static int computePortNumberFromProxySettings(final Map<String, String> settings) {
+	/**
+	 * Get all the ports on which the proxy listeners are running by parsing
+	 * the Burp Configurations settings, compute a MAX and add +1.
+	 */
+	public static int computeUnusedPort(final Map<String, String> settings) {
 
 		return getEntriesHavingKeyStartingWith(settings, PROXY_LISTENER_KEY)
 				.stream()
@@ -70,7 +78,12 @@ public final class Utility {
 									+ 1;
 
 	}
-	
+	/**
+	 * Write messages to the burp UI using the burp API
+	 * @param callback the callback object.
+	 * @param message the message to write
+	 * @param toError is an error messge or not
+	 */
 	public static void writeToConsole(final IBurpExtenderCallbacks callback, 
 			final String message, 
 			final boolean toError) {

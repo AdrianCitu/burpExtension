@@ -39,9 +39,18 @@ import com.github.adriancitu.burp.scanner.Utility;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+/**
+ * Handler that will use the burp API to generate the scanner report.
+ */
 public class ScannerReportHandler implements HttpHandler {
 
+	/**
+	 * the request parameter representing the output type of the report.
+	 */
 	private static final String OUTPUT_DEFAULT_PARAMETER = "output";
+	/**
+	 * the default output type.
+	 */
 	private static final String HTML = "HTML";
 	private final IBurpExtenderCallbacks callback;
 
@@ -77,6 +86,12 @@ public class ScannerReportHandler implements HttpHandler {
 		
 	}
 
+	/**
+	 *
+	 * @param t the http request
+	 * @return the value of the OUTPUT_DEFAULT_PARAMETER if present in the
+	 * request or "HTTP" constant otherwise.
+	 */
 	private String computeTheOutputParameter(final HttpExchange t) {
 		final IRequestInfo analyzeRequest = callback.getHelpers()
 				.analyzeRequest(t.getRequestURI().toString().getBytes());

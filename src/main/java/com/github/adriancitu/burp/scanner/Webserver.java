@@ -35,8 +35,17 @@ import com.sun.net.httpserver.HttpServer;
 
 public class Webserver {
 
+    /**
+     * system property representing the port on which the server will listen.
+     */
 	private static final String SCANNER_REPORT_PORT_PROPERTY = "scanner.report.port";
+    /**
+     * system property representing the url on which the report will be served.
+     */
 	private static final String SCANNER_REPORT_URL_PROPERTY = "scanner.report.url";
+    /**
+     * the default url if no system property specified.
+     */
 	private static final String SCANNER_REPORT_DEFAULT_URL = "/scanner/report";
 	private final HttpServer server;
 
@@ -58,13 +67,22 @@ public class Webserver {
 				+ port + "] under url [" + url +"]",
 				false);
 	}
-	
+
+    /**
+     * Compute the port on which the web server will run.
+     * First check if any port has been specified as command line
+     * parameter and use it, otherwise the server will start on
+     * MAX(ports of listeners) + 1.
+     *
+     * @param callback
+     * @return
+     */
 	private int computePort(final IBurpExtenderCallbacks callback) {
 		int port;
 		final String portAsString = System.getProperty(SCANNER_REPORT_PORT_PROPERTY);
 		
 		if (portAsString == null) {
-			port = Utility.computePortNumberFromProxySettings(
+			port = Utility.computeUnusedPort(
 					callback.saveConfig());
 			
 			Utility.writeToConsole(callback, 
@@ -82,7 +100,7 @@ public class Webserver {
 						+ SCANNER_REPORT_URL_PROPERTY 
 						+"] cannod be parsed as an Integer; the value is [" 
 						+ portAsString+ "]", true);
-				port = Utility.computePortNumberFromProxySettings(
+				port = Utility.computeUnusedPort(
 						callback.saveConfig());
 			}
 			

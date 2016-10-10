@@ -5,24 +5,24 @@ will be available on a specific url.
 
 
 Parameters to customize the execution:
-- scanner.report.port = the port on which the (extension) web server will listen. If no port is specified
-  then a port will be computed automatically. The computed port will be MAX(ports of proxy listenets) + 1.
+* scanner.report.port = the port on which the (extension) web server will listen.
+  If no port is specified then a port will be computed automatically.
+  The computed port will be MAX(ports of proxy listeners) + 1.
 
-- scanner.report.url = the url on which the report is accessible. If no url is specified then
+* scanner.report.url = the url on which the report is accessible. If no url is specified then
   the default url will be used ("/scanner/report").
 
-Usage example:
+Usage example (Starts the web server extension on port 8085 under the url "/abc"):
 java -jar -Xmx2g -Dscanner.report.port=8085 -Dscanner.report.url=/abc burpsuite_pro_v1.6.39.jar
-Starts the web server extension on port 8085 under the url "/abc"
 
 Parameters to customize the output:
--output=XML - the output will be in XML
--output=HTML - the output will be in HTML
--no output parameter then the HTML report will be generated
+* output=XML - the output will be in XML format.
+* output=HTML - the output will be in HTML format.
+* no output parameter then the HTML report will be generated.
 
 Requirements to run the extension:
-- Java 8 or later
-- Burp Suite Professional version 1.6.39 (or later ?) - not sure that the next API
+* Java 8 or later; could easily be downgraded to Java 6.
+* Burp Suite Professional version 1.6.39 (or later ?) - not sure that the next API
   versions will be backward compatible.
 
 The extension jar can be found here: https://github.com/AdrianCitu/burpExtension/tree/master/target
